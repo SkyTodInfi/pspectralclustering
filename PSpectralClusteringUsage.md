@@ -71,5 +71,6 @@ Parallel Spectral Clustering must be run in linux 64bit environment with mpich2-
     * `--initialization_method`: `orthogonal_centers` or `random`. Generally, `orthogonal_centers` works better.
   * Sample: `mpiexec -n 4 ./kmeans --num_clusters 100 --input eigenvectors.txt --output result.txt`
   * Note: this step is faster than evd,  so you need to choose reasonable number of machines. For example: using 10 machines for 300000 dataset is enough.
+
 # Check results #
   * Each line is the cluster index assigned to the corresponding instance. The order is the same as the input instance's order.
