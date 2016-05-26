@@ -40,12 +40,14 @@ Parallel Spectral Clustering must be run in linux 64bit environment with mpich2-
     * `--output`: the output datafile
   * Sample: `mpiexec -n 32 ./compute_distance --t_nearest_neighbor 10 --input data.txt --output distance.txt`
   * Note: this step is very time consuming. Try to use as many machines as possible if data set is large.
+
 ## Step 2: distance\_to\_similarity ##
   * Flags:
     * `--input`: the input distance file
     * `--output`: the output similarity file
   * Sample: `mpiexec -n 2 ./distance_to_similarity --input distance.txt --output similarity.txt`
   * Note: this step is fast. A few machines will be enough.
+
 ## Step 3: evd ##
   * Flags:
     * `--input`: the input similarity file
@@ -57,6 +59,7 @@ Parallel Spectral Clustering must be run in linux 64bit environment with mpich2-
     * `--arpack_tolerance`: the stopping criterion to stop eigenvalues computing iterations. Default is 0 which is actually not 0 but a very small value related to machine precision. Default usually works . If you wish to make it converge faster and just need approximated eigenvalues, you could set this to a larger value such as 0.0001.
   * Sample: `mpiexec -n 10 ./evd --eigenvalue 100 --eigenspace 300 --input similarity.txt --eigenvalues_output eigenvalues.txt --eigenvectors_output eigenvectors.txt`
   * Note: this step is time consuming and requires communication between distributed computers,  so you need to choose reasonable number of machines. For example: using tens of machines for 300000 dataset is enough.
+
 ## Step 4: kmeans ##
   * Flags:
     * `--input`: the eigenvectors input file
